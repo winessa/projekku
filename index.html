@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Visual | Foto & Video</title>
+    <style>
+        /* Gaya Dasar & Tipografi */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        a { text-decoration: none; color: #fff; }
+
+        /* Navigasi */
+        header {
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(18, 18, 18, 0.95);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo { font-size: 24px; font-weight: 600; letter-spacing: 2px; }
+        nav ul { list-style: none; display: flex; gap: 20px; }
+        nav ul li a:hover { color: #f39c12; }
+
+        /* Hero Section (Beranda) */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1452587925148-ce544e77e70d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') center/cover;
+            padding: 0 20px;
+        }
+        .hero h1 { font-size: 3rem; margin-bottom: 10px; }
+        .hero p { font-size: 1.2rem; color: #ccc; margin-bottom: 20px; }
+        .btn {
+            padding: 10px 25px;
+            background-color: #f39c12;
+            color: #121212;
+            font-weight: 600;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .btn:hover { background-color: #e67e22; color: #fff; }
+
+        section { padding: 100px 50px; text-align: center; }
+        section h2 { font-size: 2.5rem; margin-bottom: 40px; color: #f39c12; }
+
+        /* Efek Animasi Muncul */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Galeri Foto */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+        .gallery-item {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            cursor: zoom-in;
+        }
+        .gallery-item:hover { transform: scale(1.03); }
+
+        /* Lightbox (Pop-up) */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+        }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s;
+        }
+        .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: #fff;
+            cursor: pointer;
+        }
+        .close-lightbox:hover { color: #f39c12; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Galeri Video */
+        .video-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+        }
+        
+        /* Modifikasi untuk Video File Lokal */
+        video {
+            width: 100%;
+            height: auto;
+            border: none;
+            border-radius: 8px;
+            background-color: #000; /* Latar belakang hitam saat video dimuat */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        footer { background-color: #0a0a0a; padding: 40px 20px; text-align: center; }
+        footer p { margin-bottom: 10px; color: #aaa; }
+
+        @media (max-width: 768px) {
+            header { flex-direction: column; padding: 15px; }
+            nav ul { margin-top: 15px; flex-wrap: wrap; justify-content: center; }
+            .hero h1 { font-size: 2rem; }
+            section { padding: 60px 20px; }
+            .video-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="navbar">
+        <div class="logo">KARYA VISUAL</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Beranda</a></li>
+                <li><a href="#foto">Galeri Foto</a></li>
+                <li><a href="#video">Karya Video</a></li>
+                <li><a href="#kontak">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <h1 class="reveal">Bercerita Melalui Lensa</h1>
+        <p class="reveal">Portofolio Fotografi & Videografi Profesional</p>
+        <a href="#foto" class="btn reveal">Lihat Karya</a>
+    </section>
+
+    <section id="foto">
+        <h2 class="reveal">Galeri Foto</h2>
+        <div class="gallery-grid reveal">
+            <img src="images/foto1.jpg" alt="Karya Foto 1" class="gallery-item">
+            <img src="images/foto2.jpg" alt="Karya Foto 2" class="gallery-item">
+            <img src="images/foto3.jpg" alt="Karya Foto 3" class="gallery-item">
+            <img src="images/foto4.jpg" alt="Karya Foto 4" class="gallery-item">
+            <img src="images/foto5.jpg" alt="Karya Foto 5" class="gallery-item">
+            <img src="images/foto6.jpg" alt="Karya Foto 6" class="gallery-item">
+        </div>
+    </section>
+
+    <div id="lightbox" class="lightbox">
+        <span class="close-lightbox">&times;</span>
+        <img id="lightbox-img" src="" alt="Gambar Diperbesar">
+    </div>
+
+    <section id="video" style="background-color: #1a1a1a;">
+        <h2 class="reveal">Karya Video</h2>
+        <p class="reveal" style="margin-bottom: 30px; color:#aaa;">Koleksi karya sinematik dan videografi.</p>
+        <div class="video-container reveal">
+            
+            <video controls preload="metadata">
+                <source src="videos/video1.mp4" type="video/mp4">
+                Maaf, browser Anda tidak mendukung pemutar video ini.
+            </video>
+
+            <video controls preload="metadata">
+                <source src="videos/video2.mp4" type="video/mp4">
+                Maaf, browser Anda tidak mendukung pemutar video ini.
+            </video>
+
+        </div>
+    </section>
+
+    <section id="kontak">
+        <h2 class="reveal">Mari Berkolaborasi</h2>
+        <p class="reveal">Tertarik untuk bekerja sama? Hubungi saya melalui email atau media sosial.</p>
+        <br>
+        <a href="mailto:emailanda@domain.com" class="btn reveal">Email Saya</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Portofolio Visual. Hak Cipta Dilindungi.</p>
+    </footer>
+
+    <script>
+        // Script Lightbox
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const closeBtn = document.querySelector('.close-lightbox');
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                lightbox.style.display = 'flex';
+                lightboxImg.src = item.src; 
+            });
+        });
+
+        closeBtn.addEventListener('click', () => { lightbox.style.display = 'none'; });
+        lightbox.addEventListener('click', (e) => {
+            if (e.target !== lightboxImg) lightbox.style.display = 'none';
+        });
+
+        // Script Animasi Scroll
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+
+        const scrollObserver = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return; 
+                entry.target.classList.add('active'); 
+                observer.unobserve(entry.target); 
+            });
+        }, revealOptions);
+
+        revealElements.forEach(el => scrollObserver.observe(el));
+    </script>
+
+</body>
+</html>
